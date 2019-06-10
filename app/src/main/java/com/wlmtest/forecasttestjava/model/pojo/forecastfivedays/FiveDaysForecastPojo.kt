@@ -23,9 +23,6 @@ class FiveDaysForecastPojo {
 
         var cityForecastFiveDaysPojoList = forecast5DaysMap[dateReference]
 
-
-        var l:ArrayList<String>  = ArrayList<String>()
-
         cityForecastFiveDaysPojoList!!.add(cityForecastFiveDaysPojo)
     }
 
