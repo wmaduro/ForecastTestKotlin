@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">ForecastTestKotlin</string>
+    <string name="tab_text_1">Today</string>
+    <string name="tab_text_2">NEXT DAYS</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="city_name_greather_than_3">Please, type at least 3 letters.</string>
+    <string name="city_not_found">Sorry, the city was not  found! Please, try a different name.</string>
+    <string name="check_gps_message">Please wait, we are getting the weather information for your location!</string>
+    <string name="greeting_message">Hi! Inform the name of the city and start searching. Enjoy!.</string>
+    <string name="degree_celcius_mask">%s&#xb0;C</string>
+    <string name="degree_mask">%s&#xb0;</string>
+    <string name="degree_fahrenheit_mask">%s&#xb0; F</string>
+    <string name="lat_lon">Coord: %s, %s</string>
+    <string name="wind_speed">Wind Speed: %s km/h</string>
+    <string name="wind_direction">Wind Direction: %s</string>
     <string name="message_network_unavailable">Your internet connection seems to be unavailable! Please, check it out before next attempt.</string>
+
+
 </resources>

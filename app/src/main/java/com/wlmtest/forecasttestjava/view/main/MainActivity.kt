@@ -1,6 +1,7 @@
-package com.wlmtest.forecasttestjava
+package com.wlmtest.forecasttestjava.view.main
 
 import android.os.Bundle
+import com.wlmtest.forecasttestjava.R
 import com.wlmtest.forecasttestjava.base.ActivityBase
 
 class MainActivity : ActivityBase() {

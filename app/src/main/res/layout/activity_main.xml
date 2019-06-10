@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:background="@color/general_app_backgournd">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     xmlns:tools="http://schemas.android.com/tools"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     tools:context=".view.main.MainActivity"
+                                                     android:id="@+id/main_layout"
+                                                     android:background="@color/general_app_backgournd">
 
         <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
@@ -14,21 +14,39 @@
                 android:theme="@style/AppTheme.AppBarOverlay"
                 android:background="@color/general_app_backgournd">
 
-        <EditText
-                android:id="@+id/etCurrentWeatherData"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:background="@drawable/bg_search"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:layout_margin="10dp"
-                android:textColor="@color/black"
-                android:drawableRight="@drawable/ic_magnifier"
-                android:imeOptions="actionSearch"
-        />
+                <EditText
+                        android:id="@+id/etCurrentWeatherData"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:background="@drawable/bg_search"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:layout_margin="10dp"
+                        android:textColor="@color/black"
+                        android:drawableRight="@drawable/ic_magnifier"
+                        android:imeOptions="actionSearch"
+                />
+
 
         </com.google.android.material.appbar.AppBarLayout>
+
+
+        <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/fragment_container2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        </FrameLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

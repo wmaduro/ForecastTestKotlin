@@ -55,4 +55,5 @@ dependencies {
     //eventbus
     def eventbusVersion = '3.1.1'
     implementation "org.greenrobot:eventbus:$eventbusVersion"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 }
