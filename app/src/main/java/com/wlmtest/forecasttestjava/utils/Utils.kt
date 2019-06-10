@@ -68,21 +68,15 @@ object Utils {
      */
 
         @JvmStatic
-        fun extractDateInfo(dateReference: String?, hour: Boolean): String? {
-            if (dateReference == null || dateReference.length != 19) {
-                return null
-            }
+        fun extractDateInfo(dateReference: String, hour: Boolean): String {
 
-            var dayMonth: String? = null
+            var dayMonth: String
 
             if (hour) {
                 dayMonth = dateReference.substring(11, 16)
             } else {
                 dayMonth = dateReference.substring(8, 10) + "/" + dateReference.substring(5, 7)
             }
-
-
-
 
             return dayMonth
         }
