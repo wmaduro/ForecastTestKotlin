@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#CBEEFF</color>
+    <color name="colorPrimaryDark">#8FDBFF</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="general_app_backgournd">#CBEEFF</color>
+    <color name="cardview_transparency70">#D7EFFBFD</color>
+    <color name="cardview_transparency100">#00EFFBFD</color>
+    <color name="cardview_transparency50">#79EFFBFD</color>
+    <color name="cardview_transparency90">#00EFFBFD</color>
+    <color name="cardview_gray_text">#EE646464</color>
+    <color name="cardview_gray_light_text">#BE646464</color>
+    <color name="forecast_city_title">#4B8FDBFF</color>
 </resources>
