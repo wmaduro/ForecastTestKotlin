@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ForecastTestKotlin</string>
+    <string name="message_network_unavailable">Your internet connection seems to be unavailable! Please, check it out before next attempt.</string>
 </resources>
