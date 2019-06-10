@@ -13,7 +13,7 @@ import java.util.ArrayList
 import java.util.Date
 
 object ApiDataParser {
-
+    @JvmStatic
     fun parseFiveDaysForecastDataToFiveDaysForecastPojo(
         fiveDaysForecastData: FiveDaysForecastData?
     ): FiveDaysForecastPojo? {
@@ -80,6 +80,7 @@ object ApiDataParser {
         return fiveDaysForecastPojo
     }
 
+    @JvmStatic
     fun parseCurrentWeatherDataToCityForecastPojoList(currentWeatherData: CurrentWeatherData): List<CityForecastPojo> {
 
         val cityForecastPojoList = ArrayList<CityForecastPojo>()
