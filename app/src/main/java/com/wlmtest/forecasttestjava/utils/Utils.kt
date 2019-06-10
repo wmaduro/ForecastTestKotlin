@@ -4,8 +4,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 object Utils {
-
+    @JvmField
     val UNIT_CELCIUS_DB = "metric"
+    @JvmField
     val UNIT_FARENHITE_DB = "imperial"
 
     /**
