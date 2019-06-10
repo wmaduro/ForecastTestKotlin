@@ -1,8 +1,7 @@
-package com.wlmtest.forecasttestkotlin
+package com.wlmtest.forecasttestjava
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.wlmtest.forecasttestkotlin.base.ActivityBase
+import com.wlmtest.forecasttestjava.base.ActivityBase
 
 class MainActivity : ActivityBase() {
 

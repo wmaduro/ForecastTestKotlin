@@ -1,4 +1,4 @@
-package com.wlmtest.forecasttestkotlin
+package com.wlmtest.forecasttestjava
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

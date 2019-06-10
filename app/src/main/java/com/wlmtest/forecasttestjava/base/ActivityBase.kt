@@ -1,9 +1,8 @@
-package com.wlmtest.forecasttestkotlin.base
+package com.wlmtest.forecasttestjava.base
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
-import com.wlmtest.forecasttestkotlin.R
+import com.wlmtest.forecasttestjava.R
 
 
 open class ActivityBase : AppCompatActivity() {

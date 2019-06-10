@@ -1,4 +1,4 @@
-package com.wlmtest.forecasttestkotlin
+package com.wlmtest.forecasttestjava
 
 import org.junit.Test
 
