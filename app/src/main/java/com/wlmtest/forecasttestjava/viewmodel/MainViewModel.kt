@@ -85,7 +85,7 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
         /**
          * Responsible for observing the data returned form the API for current weather search.
          */
-        this.currentWeatherData.observeForever { currentWeatherData ->
+        currentWeatherData.observeForever { currentWeatherData ->
             cityForecastSearchList.value = ArrayList()
 
             if (currentWeatherData != null && currentWeatherData.list != null && currentWeatherData.list!!.size >= 0) {

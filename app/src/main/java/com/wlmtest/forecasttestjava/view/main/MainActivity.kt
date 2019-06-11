@@ -51,17 +51,17 @@ class MainActivity : ActivityBase() {
      * @return
      */
     private val fragmentContainer: Fragment?
-        get() = this.supportFragmentManager.findFragmentById(R.id.fragment_container)
+        get() = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        this.mainViewModel = ViewModelProviders.of(this, MainViewModelFactory(ForecastTestJavaRepository.getInstance()))
+        mainViewModel = ViewModelProviders.of(this, MainViewModelFactory(ForecastTestJavaRepository.getInstance()))
             .get(MainViewModel::class.java)
 
-        if (this.fragmentContainer == null) {
+        if (fragmentContainer == null) {
 
             supportFragmentManager
                 .beginTransaction()
@@ -205,9 +205,9 @@ class MainActivity : ActivityBase() {
         /**
          * Show the dialog when the internet is unavailable.
          */
-        this.mainViewModel.showInternetUnavailableMessage.observe(this, Observer { showInternetUnavailableMessage() })
+        mainViewModel.showInternetUnavailableMessage.observe(this, Observer { showInternetUnavailableMessage() })
 
-        this.mainViewModel.progressDialogLoadingData.observe(this, Observer { loading ->
+        mainViewModel.progressDialogLoadingData.observe(this, Observer { loading ->
 
                 if (loading) {
                     showProgressDialog(R.string.loading_from_api_message)
@@ -222,14 +222,14 @@ class MainActivity : ActivityBase() {
          * Dismiss the progress dialog when the app is initialized.
          */
 
-        this.mainViewModel.appInitialized.observe(this, Observer { appInitialized ->
+        mainViewModel.appInitialized.observe(this, Observer { appInitialized ->
             closeProgressDialog()
         })
 
         /**
          * Switch between fragments and hide keyboard.
          */
-        this.mainViewModel.fragmentOrchestrationHelper.observe(this, Observer { s ->
+        mainViewModel.fragmentOrchestrationHelper.observe(this, Observer { s ->
             if (s == MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT) {
 
                 changeCurrentFragment(ForecastFragment());
@@ -259,7 +259,7 @@ class MainActivity : ActivityBase() {
             false
         })
 
-        this.etCurrentWeatherData.setOnTouchListener(View.OnTouchListener { v, event ->
+        etCurrentWeatherData.setOnTouchListener(View.OnTouchListener { v, event ->
             val DRAWABLE_RIGHT = 2
 
             if (event.action == MotionEvent.ACTION_UP) {
