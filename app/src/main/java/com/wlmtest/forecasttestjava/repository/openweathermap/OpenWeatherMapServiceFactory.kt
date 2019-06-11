@@ -68,7 +68,7 @@ class OpenWeatherMapServiceFactory private constructor() {
     }
 }
 
-class NetworkAvailableInterceptor : Interceptor {
+private class NetworkAvailableInterceptor : Interceptor {
 
     /**
      * Interceptor class for setting of the headers for every request

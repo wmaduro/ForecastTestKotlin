@@ -58,7 +58,7 @@ class MainActivity : ActivityBase() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        this.mainViewModel = ViewModelProviders.of(this, MainViewModelFactory(ForecastTestJavaRepository()))
+        this.mainViewModel = ViewModelProviders.of(this, MainViewModelFactory(ForecastTestJavaRepository.getInstance()))
             .get(MainViewModel::class.java)
 
         if (this.fragmentContainer == null) {

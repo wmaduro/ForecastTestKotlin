@@ -15,13 +15,27 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
-class ForecastTestJavaRepository
-constructor() {
+class ForecastTestJavaRepository private constructor() {
 
     private val openWeatherMapService: OpenWeatherMapService
 
     init {
         openWeatherMapService = OpenWeatherMapServiceFactory.getInstance().openWeatherMapService
+    }
+
+    companion object {
+
+        private var instance: ForecastTestJavaRepository = ForecastTestJavaRepository()
+
+        fun getInstance(): ForecastTestJavaRepository {
+            if (instance == null) {
+                synchronized(ForecastTestJavaRepository::class.java) {
+                    if (instance == null)
+                        instance = ForecastTestJavaRepository()
+                }
+            }
+            return instance
+        }
     }
 
 
