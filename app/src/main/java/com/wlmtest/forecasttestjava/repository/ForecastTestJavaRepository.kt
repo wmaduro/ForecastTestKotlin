@@ -14,8 +14,8 @@ import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class ForecastTestJavaRepository @Inject
+
+class ForecastTestJavaRepository
 constructor() {
 
     private val openWeatherMapService: OpenWeatherMapService

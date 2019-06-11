@@ -20,7 +20,7 @@ import javax.inject.Inject
 import java.util.ArrayList
 
 
-class MainViewModel @Inject
+class MainViewModel
 constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) : ViewModel() {
 
 

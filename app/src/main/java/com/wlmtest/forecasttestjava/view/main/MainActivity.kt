@@ -35,7 +35,7 @@ import com.wlmtest.forecasttestjava.base.ActivityBase
 import com.wlmtest.forecasttestjava.repository.ForecastTestJavaRepository
 import com.wlmtest.forecasttestjava.view.forecast.ForecastFragment
 import com.wlmtest.forecasttestjava.view.search.SearchResultFragment
-import com.wlmtest.forecasttestjava.viewmodel.MainViewModeFactory
+import com.wlmtest.forecasttestjava.viewmodel.MainViewModelFactory
 import com.wlmtest.forecasttestjava.viewmodel.MainViewModel
 
 class MainActivity : ActivityBase() {
@@ -58,7 +58,7 @@ class MainActivity : ActivityBase() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        this.mainViewModel = ViewModelProviders.of(this, MainViewModeFactory(ForecastTestJavaRepository()))
+        this.mainViewModel = ViewModelProviders.of(this, MainViewModelFactory(ForecastTestJavaRepository()))
             .get(MainViewModel::class.java)
 
         if (this.fragmentContainer == null) {
