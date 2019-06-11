@@ -23,7 +23,7 @@ interface OpenWeatherMapInterface {
     fun findFiveDaysForecastDataByCityId(
         @Query("id") id: String,
         @Query("units") unit: String,
-        @Query("cnt") cn: String
+        @Query("cnt") cn: String?
     ): Call<FiveDaysForecastData>
 
 

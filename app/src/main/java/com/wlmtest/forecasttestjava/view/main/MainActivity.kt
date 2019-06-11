@@ -39,6 +39,7 @@ import com.wlmtest.forecasttestjava.viewmodel.MainViewModeFactory
 import com.wlmtest.forecasttestjava.viewmodel.MainViewModel
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import com.wlmtest.forecasttestjava.view.forecast.ForecastFragment
 
 class MainActivity : ActivityBase() {
 
@@ -238,7 +239,7 @@ class MainActivity : ActivityBase() {
         this.mainViewModel!!.fragmentOrchestrationHelperMutableLiveData.observe(this, Observer { s ->
             if (s == MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT) {
 
-                //                    changeCurrentFragment(new ForecastFragment());
+                changeCurrentFragment(ForecastFragment ());
 
             } else if (s == MainOrchestrationHelper.SHOW_SEARCH_RESULT_FRAGMENT) {
 

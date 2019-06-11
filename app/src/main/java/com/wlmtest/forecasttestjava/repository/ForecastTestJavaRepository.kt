@@ -38,7 +38,7 @@ constructor() {
 
         val fiveDaysForecastDataCall = openWeatherMapInterface.findFiveDaysForecastDataByCityId(
             cityId,
-            Utils.UNIT_CELCIUS_DB, null!!
+            Utils.UNIT_CELCIUS_DB, null
         )
 
         fiveDaysForecastDataCall.enqueue(object : Callback<FiveDaysForecastData> {

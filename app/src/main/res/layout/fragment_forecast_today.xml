@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cityForecastPojoSelected"
+            type="com.wlmtest.forecasttestjava.model.pojo.CityForecastPojo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.forecast.tabs.today.ForecastTodayFragment">
+
+
+        <TextView
+            android:layout_width="359dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@{cityForecastPojoSelected.dateReference}"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="359dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="36dp"
+            android:gravity="center"
+            android:text="@{cityForecastPojoSelected.hourReference}"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <!--MIN MAX TEMP-->
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="80dp"
+
+            android:text="@{@string/degree_celcius_mask(`Min:  `+cityForecastPojoSelected.minTemp)}"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="104dp"
+
+            android:text="@{@string/degree_celcius_mask(`Max: `+cityForecastPojoSelected.maxTemp)}"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--MAIN TEMPERATURE-->
+
+        <TextView
+            android:layout_width="99dp"
+            android:layout_height="91dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="146dp"
+            android:gravity="right"
+            android:text="@{cityForecastPojoSelected.temperature}"
+            android:textSize="80dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="115dp"
+            android:layout_marginTop="158dp"
+            android:gravity="center"
+            android:text="&#xb0; C"
+            android:textSize="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--WIND-->
+
+
+        <TextView
+            android:layout_width="184dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="276dp"
+            android:text="@{@string/wind_speed(cityForecastPojoSelected.windSpeed)}"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="184dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="296dp"
+            android:text="@{@string/wind_direction(cityForecastPojoSelected.windDirection)}"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--IMAGE AND MESSAGE-->
+
+
+        <ImageView
+            android:id="@+id/ivForecastToday"
+            android:layout_width="152dp"
+            android:layout_height="121dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="167dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="184dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="top|center_horizontal"
+            android:text="@{cityForecastPojoSelected.message}"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

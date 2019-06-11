@@ -19,6 +19,6 @@ class List {
     @Json(name = "sys")
     var sys: Sys? = null
     @Json(name = "dt_txt")
-    lateinit var dtTxt: String
+    lateinit var dt_txt: String
 
 }

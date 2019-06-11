@@ -35,10 +35,10 @@ object ApiDataParser {
             cityForecastFiveDaysPojo.cityName = city!!.name
 
             //day and month
-            cityForecastFiveDaysPojo.dayMonthReference = Utils.extractDateInfo(listReference.dtTxt, false)
+            cityForecastFiveDaysPojo.dayMonthReference = Utils.extractDateInfo(listReference.dt_txt, false)
 
             //hour
-            cityForecastFiveDaysPojo.hourReference = Utils.extractDateInfo(listReference.dtTxt, true)
+            cityForecastFiveDaysPojo.hourReference = Utils.extractDateInfo(listReference.dt_txt, true)
 
             //Max Temp
             cityForecastFiveDaysPojo.maxTemp =
