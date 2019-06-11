@@ -4,8 +4,8 @@ import android.location.Location
 import androidx.lifecycle.MutableLiveData
 import com.wlmtest.forecasttestjava.model.api.currentweatherdata.CurrentWeatherData
 import com.wlmtest.forecasttestjava.model.api.fivedaysforecastdata.FiveDaysForecastData
-import com.wlmtest.forecasttestjava.repository.openweathermap.OpenWeatherMapApi
-import com.wlmtest.forecasttestjava.repository.openweathermap.OpenWeatherMapInterface
+import com.wlmtest.forecasttestjava.repository.openweathermap.OpenWeatherMapServiceFactory
+import com.wlmtest.forecasttestjava.repository.openweathermap.OpenWeatherMapService
 import com.wlmtest.forecasttestjava.utils.Utils
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,10 +18,10 @@ import javax.inject.Singleton
 class ForecastTestJavaRepository @Inject
 constructor() {
 
-    private val openWeatherMapInterface: OpenWeatherMapInterface
+    private val openWeatherMapService: OpenWeatherMapService
 
     init {
-        openWeatherMapInterface = OpenWeatherMapApi.getInstance().openWeatherMapInterface
+        openWeatherMapService = OpenWeatherMapServiceFactory.getInstance().openWeatherMapService
     }
 
 
@@ -36,7 +36,7 @@ constructor() {
         fiveDaysForecastDataMutableLiveData: MutableLiveData<FiveDaysForecastData>
     ) {
 
-        val fiveDaysForecastDataCall = openWeatherMapInterface.findFiveDaysForecastDataByCityId(
+        val fiveDaysForecastDataCall = openWeatherMapService.findFiveDaysForecastDataByCityId(
             cityId,
             Utils.UNIT_CELCIUS_DB, null
         )
@@ -77,14 +77,14 @@ constructor() {
         if (searchParam is String) {
 
             currentWeatherDataCall =
-                openWeatherMapInterface.findCurrentWeatherDataByCityName(searchParam, Utils.UNIT_CELCIUS_DB)
+                openWeatherMapService.findCurrentWeatherDataByCityName(searchParam, Utils.UNIT_CELCIUS_DB)
 
         } else {
 
             val latitude = (searchParam as Location).latitude
             val longitue = searchParam.longitude
             currentWeatherDataCall =
-                openWeatherMapInterface.findCurrentWeatherDataByGPS(latitude, longitue, Utils.UNIT_CELCIUS_DB, null)
+                openWeatherMapService.findCurrentWeatherDataByGPS(latitude, longitue, Utils.UNIT_CELCIUS_DB, null)
         }
 
         currentWeatherDataCall.enqueue(object : Callback<CurrentWeatherData> {

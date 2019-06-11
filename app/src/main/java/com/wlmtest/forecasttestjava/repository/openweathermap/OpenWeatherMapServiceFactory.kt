@@ -1,6 +1,5 @@
 package com.wlmtest.forecasttestjava.repository.openweathermap
 
-import android.util.Log
 import com.wlmtest.forecasttestjava.base.events.InternetDisconnectedEvent
 import com.wlmtest.forecasttestjava.base.events.ProgressDialogLoadingDataEvent
 import com.wlmtest.forecasttestjava.utils.Utils
@@ -13,7 +12,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class OpenWeatherMapApi private constructor() {
+class OpenWeatherMapServiceFactory private constructor() {
 
 
     private val BASE_URL = "http://api.openweathermap.org"
@@ -22,7 +21,7 @@ class OpenWeatherMapApi private constructor() {
      * Get the API's service
      * @return
      */
-    val openWeatherMapInterface: OpenWeatherMapInterface
+    val openWeatherMapService: OpenWeatherMapService
         get() = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(this.provideOkHttpClient())
@@ -31,7 +30,7 @@ class OpenWeatherMapApi private constructor() {
                     .create()
             )
             .build()
-            .create(OpenWeatherMapInterface::class.java)
+            .create(OpenWeatherMapService::class.java)
 
 
     /**
@@ -55,13 +54,13 @@ class OpenWeatherMapApi private constructor() {
 
     companion object {
 
-        private var instance: OpenWeatherMapApi = OpenWeatherMapApi()
+        private var instance: OpenWeatherMapServiceFactory = OpenWeatherMapServiceFactory()
 
-        fun getInstance(): OpenWeatherMapApi {
+        fun getInstance(): OpenWeatherMapServiceFactory {
             if (instance == null) {
-                synchronized(OpenWeatherMapApi::class.java) {
+                synchronized(OpenWeatherMapServiceFactory::class.java) {
                     if (instance == null)
-                        instance = OpenWeatherMapApi()
+                        instance = OpenWeatherMapServiceFactory()
                 }
             }
             return instance

@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface OpenWeatherMapInterface {
+interface OpenWeatherMapService {
 
     @GET("data/2.5/find?APPID=51b0889d8947bb4df12f2f1928ec6daa")
     fun findCurrentWeatherDataByCityName(@Query("q") cityName: String, @Query("units") unit: String): Call<CurrentWeatherData>
