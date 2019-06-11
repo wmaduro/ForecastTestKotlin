@@ -2,7 +2,6 @@ package com.wlmtest.forecasttestjava.view.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -30,10 +29,10 @@ class CityForecastRecicleViewAdapter(private val mainViewModel: MainViewModel) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.cityForecastItemBinding.cityForecastPojo =
-            this.mainViewModel.cityForecastSearchListMutableLiveData.value!![position]
+            this.mainViewModel.cityForecastSearchList.value!![position]
 
         try {
-            val iconRef = this.mainViewModel.cityForecastSearchListMutableLiveData.value!![position].icon
+            val iconRef = this.mainViewModel.cityForecastSearchList.value!![position].icon
 
             val ivForecastItem = holder.cityForecastItemBinding.ivForecastItem
             if (iconRef != null && !iconRef.isEmpty()) {
@@ -48,9 +47,9 @@ class CityForecastRecicleViewAdapter(private val mainViewModel: MainViewModel) :
     }
 
     override fun getItemCount(): Int {
-        return if (this.mainViewModel.cityForecastSearchListMutableLiveData == null || this.mainViewModel.cityForecastSearchListMutableLiveData.value == null) {
+        return if (this.mainViewModel.cityForecastSearchList == null || this.mainViewModel.cityForecastSearchList.value == null) {
             0
-        } else this.mainViewModel.cityForecastSearchListMutableLiveData.value!!.size
+        } else this.mainViewModel.cityForecastSearchList.value!!.size
     }
 
     class ViewHolder(var cityForecastItemBinding: CityForecastItemBinding) :

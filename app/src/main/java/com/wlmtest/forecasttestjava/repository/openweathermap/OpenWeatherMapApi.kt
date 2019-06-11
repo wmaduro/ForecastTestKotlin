@@ -79,17 +79,19 @@ class NetworkAvailableInterceptor : Interceptor {
         var request = chain.request()
 
         if (!Utils.isNetworkAvailable()) {
+            //open dialog network unavailable
             EventBus.getDefault().post(InternetDisconnectedEvent())
         } else {
+            // open progress dialog
             EventBus.getDefault().post(ProgressDialogLoadingDataEvent(true))
         }
 
         var response : Response = chain.proceed(request);
-        Log.d("maduro","----------------------------------------------")
-        Log.d("maduro", response.body().toString())
-        EventBus.getDefault().post(ProgressDialogLoadingDataEvent(false))
 
-        Log.d("maduro","**********************************************")
+        /**
+         * after getting the response, send the event to close the progress dialog
+         */
+        EventBus.getDefault().post(ProgressDialogLoadingDataEvent(false))
 
         return response
     }

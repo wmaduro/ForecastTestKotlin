@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.wlmtest.forecasttestjava.R
 import com.wlmtest.forecasttestjava.databinding.FragmentForecast5DaysBinding
-import com.wlmtest.forecasttestjava.model.pojo.forecastfivedays.FiveDaysForecastPojo
 import com.wlmtest.forecasttestjava.view.main.MainActivity
 
 /**
@@ -41,7 +40,7 @@ class Forecast5DaysFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-        (activity as MainActivity).mainViewModel.fiveDaysForecastPojoMutableLiveData.observe(this, Observer {
+        (activity as MainActivity).mainViewModel.fiveDaysForecastPojo.observe(this, Observer {
             val forecast5DaysFragmentRecicleViewAdapter =
                 Forecast5DaysFragmentRecicleViewAdapter((activity as MainActivity).mainViewModel)
 

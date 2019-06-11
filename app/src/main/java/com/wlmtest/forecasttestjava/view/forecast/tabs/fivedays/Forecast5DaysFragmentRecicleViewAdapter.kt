@@ -6,11 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.wlmtest.forecasttestjava.R
 import com.wlmtest.forecasttestjava.databinding.Forecast5daysItemBinding
-import com.wlmtest.forecasttestjava.model.pojo.forecastfivedays.CityForecastFiveDaysPojo
 import com.wlmtest.forecasttestjava.viewmodel.MainViewModel
-
-import java.util.ArrayList
-import java.util.LinkedHashMap
 
 
 class Forecast5DaysFragmentRecicleViewAdapter(private val mainViewModel: MainViewModel) :
@@ -29,7 +25,7 @@ class Forecast5DaysFragmentRecicleViewAdapter(private val mainViewModel: MainVie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val forecast5DaysMap = this.mainViewModel.fiveDaysForecastPojoMutableLiveData
+        val forecast5DaysMap = this.mainViewModel.fiveDaysForecastPojo
             .value!!
             .forecast5DaysMap
 
@@ -44,9 +40,9 @@ class Forecast5DaysFragmentRecicleViewAdapter(private val mainViewModel: MainVie
     }
 
     override fun getItemCount(): Int {
-        return if (this.mainViewModel.fiveDaysForecastPojoMutableLiveData == null || this.mainViewModel.fiveDaysForecastPojoMutableLiveData.value == null) {
+        return if (this.mainViewModel.fiveDaysForecastPojo == null || this.mainViewModel.fiveDaysForecastPojo.value == null) {
             0
-        } else this.mainViewModel.fiveDaysForecastPojoMutableLiveData.value!!.forecast5DaysMap.size
+        } else this.mainViewModel.fiveDaysForecastPojo.value!!.forecast5DaysMap.size
     }
 
     class ViewHolder(var forecast5daysItemBinding: Forecast5daysItemBinding) :

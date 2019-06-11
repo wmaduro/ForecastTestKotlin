@@ -229,7 +229,7 @@ class MainActivity : ActivityBase() {
         /**
          * Switch between fragments and hide keyboard.
          */
-        this.mainViewModel.fragmentOrchestrationHelperMutableLiveData.observe(this, Observer { s ->
+        this.mainViewModel.fragmentOrchestrationHelper.observe(this, Observer { s ->
             if (s == MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT) {
 
                 changeCurrentFragment(ForecastFragment());

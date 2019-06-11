@@ -11,7 +11,6 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.wlmtest.forecasttestjava.R
 import com.wlmtest.forecasttestjava.databinding.FragmentForecastBinding
-import com.wlmtest.forecasttestjava.model.pojo.CityForecastPojo
 import com.wlmtest.forecasttestjava.view.main.MainActivity
 
 /**
@@ -49,7 +48,7 @@ class ForecastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cityForecastPojo = (activity as MainActivity).mainViewModel.cityForecastPojoSelectedMutableLiveData.value
+        val cityForecastPojo = (activity as MainActivity).mainViewModel.cityForecastPojoSelected.value
 
         fragmentForecastBinding!!.cityForecastPojoSelected = cityForecastPojo
 

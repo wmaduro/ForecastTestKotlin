@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
 import com.wlmtest.forecasttestjava.R
 import com.wlmtest.forecasttestjava.databinding.FragmentForecastTodayBinding
-import com.wlmtest.forecasttestjava.model.pojo.CityForecastPojo
 import com.wlmtest.forecasttestjava.view.main.MainActivity
 
 /**
@@ -43,7 +41,7 @@ class ForecastTodayFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val cityForecastPojo = (activity as MainActivity).mainViewModel.cityForecastPojoSelectedMutableLiveData.value
+        val cityForecastPojo = (activity as MainActivity).mainViewModel.cityForecastPojoSelected.value
 
         fragmentForecastTodayBinding!!.cityForecastPojoSelected = cityForecastPojo
 

@@ -1,16 +1,12 @@
 package com.wlmtest.forecasttestjava.repository
 
 import com.wlmtest.forecasttestjava.model.api.currentweatherdata.CurrentWeatherData
-import com.wlmtest.forecasttestjava.model.api.currentweatherdata.Weather
-import com.wlmtest.forecasttestjava.model.api.fivedaysforecastdata.City
 import com.wlmtest.forecasttestjava.model.api.fivedaysforecastdata.FiveDaysForecastData
 import com.wlmtest.forecasttestjava.model.pojo.CityForecastPojo
 import com.wlmtest.forecasttestjava.model.pojo.forecastfivedays.CityForecastFiveDaysPojo
 import com.wlmtest.forecasttestjava.model.pojo.forecastfivedays.FiveDaysForecastPojo
 import com.wlmtest.forecasttestjava.utils.Utils
-
-import java.util.ArrayList
-import java.util.Date
+import java.util.*
 
 object ApiDataParser {
     @JvmStatic

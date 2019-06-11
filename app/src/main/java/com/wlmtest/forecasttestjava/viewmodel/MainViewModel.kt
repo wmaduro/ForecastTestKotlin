@@ -2,7 +2,6 @@ package com.wlmtest.forecasttestjava.viewmodel
 
 import android.location.Location
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.wlmtest.forecasttestjava.base.events.InternetDisconnectedEvent
 import com.wlmtest.forecasttestjava.base.events.ProgressDialogLoadingDataEvent
@@ -28,24 +27,24 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
     /**
      * API DATA
      */
-    private val currentWeatherDataMutableLiveData = MutableLiveData<CurrentWeatherData>()
-    private val fiveDaysForecastDataMutableLiveData = MutableLiveData<FiveDaysForecastData>()
+    private val currentWeatherData = MutableLiveData<CurrentWeatherData>()
+    private val fiveDaysForecastData = MutableLiveData<FiveDaysForecastData>()
 
     /**
      * CITY FORECAST
      */
-    var cityForecastPojoSelectedMutableLiveData = MutableLiveData<CityForecastPojo>()
-    var cityForecastSearchListMutableLiveData = MutableLiveData<List<CityForecastPojo>>()
+    var cityForecastPojoSelected = MutableLiveData<CityForecastPojo>()
+    var cityForecastSearchList = MutableLiveData<List<CityForecastPojo>>()
 
     /**
      * CITY FORECAST FIVE DAYS
      */
-    var fiveDaysForecastPojoMutableLiveData = MutableLiveData<FiveDaysForecastPojo>()
+    var fiveDaysForecastPojo = MutableLiveData<FiveDaysForecastPojo>()
 
     /**
      * VISUAL ORCHESTRATION
      */
-    var fragmentOrchestrationHelperMutableLiveData = MutableLiveData<String>()
+    var fragmentOrchestrationHelper = MutableLiveData<String>()
     var appInitialized = MutableLiveData<Boolean>()
     var showInternetUnavailableMessage = MutableLiveData<Boolean>()
 
@@ -86,8 +85,8 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
         /**
          * Responsible for observing the data returned form the API for current weather search.
          */
-        this.currentWeatherDataMutableLiveData.observeForever { currentWeatherData ->
-            cityForecastSearchListMutableLiveData.value = ArrayList()
+        this.currentWeatherData.observeForever { currentWeatherData ->
+            cityForecastSearchList.value = ArrayList()
 
             if (currentWeatherData != null && currentWeatherData.list != null && currentWeatherData.list!!.size >= 0) {
 
@@ -96,18 +95,18 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
 
 
                 if (cityForecastPojoList.size == 1) {
-                    cityForecastPojoSelectedMutableLiveData.value = cityForecastPojoList[0]
-                    fragmentOrchestrationHelperMutableLiveData.setValue(MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT)
+                    cityForecastPojoSelected.value = cityForecastPojoList[0]
+                    fragmentOrchestrationHelper.setValue(MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT)
 
                 } else {
 
-                    cityForecastSearchListMutableLiveData.value = cityForecastPojoList
-                    fragmentOrchestrationHelperMutableLiveData.setValue(MainOrchestrationHelper.SHOW_SEARCH_RESULT_FRAGMENT)
+                    cityForecastSearchList.value = cityForecastPojoList
+                    fragmentOrchestrationHelper.setValue(MainOrchestrationHelper.SHOW_SEARCH_RESULT_FRAGMENT)
 
                 }
 
             } else {
-                fragmentOrchestrationHelperMutableLiveData.setValue(MainOrchestrationHelper.SHOW_SEARCH_RESULT_FRAGMENT)
+                fragmentOrchestrationHelper.setValue(MainOrchestrationHelper.SHOW_SEARCH_RESULT_FRAGMENT)
             }
 
             //
@@ -119,17 +118,17 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
          * Responsible for observing when some Forecast Pojo is selected. This selection will trigger the request of FiveDaysForecastData.
          *
          */
-        cityForecastPojoSelectedMutableLiveData.observeForever { cityForecastPojo ->
+        cityForecastPojoSelected.observeForever { cityForecastPojo ->
             forecastTestJavaRepository
-                .findFiveDaysForecastData(cityForecastPojo.cityId!!, fiveDaysForecastDataMutableLiveData)
+                .findFiveDaysForecastData(cityForecastPojo.cityId!!, fiveDaysForecastData)
         }
 
         /**
          * Responsible for observing the API Five days forecast data and trigger the parse to a POJO.
          *
          */
-        fiveDaysForecastDataMutableLiveData.observeForever { fiveDaysForecastData ->
-            fiveDaysForecastPojoMutableLiveData.value =
+        fiveDaysForecastData.observeForever { fiveDaysForecastData ->
+            fiveDaysForecastPojo.value =
                 ApiDataParser.parseFiveDaysForecastDataToFiveDaysForecastPojo(fiveDaysForecastData)
         }
     }
@@ -145,7 +144,7 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
     fun findCurrentWeatherDataByCityName(cityName: String) {
 
         forecastTestJavaRepository
-            .findCurrentWeatherData(cityName, currentWeatherDataMutableLiveData)
+            .findCurrentWeatherData(cityName, currentWeatherData)
 
     }
 
@@ -159,7 +158,7 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
     fun findCurrentWeatherDataByGPSCoordinates(location: Location) {
 
         forecastTestJavaRepository
-            .findCurrentWeatherData(location, currentWeatherDataMutableLiveData)
+            .findCurrentWeatherData(location, currentWeatherData)
 
     }
 
@@ -171,10 +170,10 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
      */
     fun setCityForecastPojoSelected(cityForecastPojo: CityForecastPojo) {
         //clearn  5days data
-        fiveDaysForecastPojoMutableLiveData.value = null
+        fiveDaysForecastPojo.value = null
 
-        cityForecastPojoSelectedMutableLiveData.value = cityForecastPojo
-        fragmentOrchestrationHelperMutableLiveData.value = MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT
+        cityForecastPojoSelected.value = cityForecastPojo
+        fragmentOrchestrationHelper.value = MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT
     }
 
 

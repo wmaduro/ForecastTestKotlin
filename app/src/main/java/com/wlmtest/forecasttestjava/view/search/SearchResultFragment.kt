@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.wlmtest.forecasttestjava.R
 import com.wlmtest.forecasttestjava.databinding.FragmentSearchResultBinding
-import com.wlmtest.forecasttestjava.model.pojo.CityForecastPojo
 import com.wlmtest.forecasttestjava.view.main.MainActivity
 
 /**
@@ -64,7 +63,7 @@ class SearchResultFragment : Fragment() {
     private fun setObservers() {
 
         (activity as MainActivity)
-            .mainViewModel.cityForecastSearchListMutableLiveData
+            .mainViewModel.cityForecastSearchList
             .observe(this,
                 Observer { cityForecastPojoList ->
                     if (cityForecastPojoList.size > 0) {
