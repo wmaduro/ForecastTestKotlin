@@ -7,7 +7,7 @@ class List {
     @Json(name = "dt")
     var dt: Int? = null
     @Json(name = "main")
-    var main: Main? = null
+    lateinit var main: Main
     @Json(name = "weather")
     var weather: java.util.List<Weather>? = null
     @Json(name = "clouds")

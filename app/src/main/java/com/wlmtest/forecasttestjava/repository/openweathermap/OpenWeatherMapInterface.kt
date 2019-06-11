@@ -16,7 +16,7 @@ interface OpenWeatherMapInterface {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("units") unit: String,
-        @Query("cnt") cn: String
+        @Query("cnt") cn: String?
     ): Call<CurrentWeatherData>
 
     @GET("data/2.5/forecast?APPID=51b0889d8947bb4df12f2f1928ec6daa")

@@ -82,7 +82,7 @@ constructor() {
             val latitude = (searchParam as Location).latitude
             val longitue = searchParam.longitude
             currentWeatherDataCall =
-                openWeatherMapInterface.findCurrentWeatherDataByGPS(latitude, longitue, Utils.UNIT_CELCIUS_DB, "1")
+                openWeatherMapInterface.findCurrentWeatherDataByGPS(latitude, longitue, Utils.UNIT_CELCIUS_DB, null)
         }
 
         currentWeatherDataCall.enqueue(object : Callback<CurrentWeatherData> {

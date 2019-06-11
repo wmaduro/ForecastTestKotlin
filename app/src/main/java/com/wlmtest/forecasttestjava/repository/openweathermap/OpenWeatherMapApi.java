@@ -45,7 +45,7 @@ public class OpenWeatherMapApi {
         OpenWeatherMapInterface openWeatherMapInterface =
                 new Retrofit.Builder()
                         .baseUrl(BASE_URL)
-                        .client(this.provideOkHttpClient())
+//                        .client(this.provideOkHttpClient())
                         .addConverterFactory(MoshiConverterFactory
                                 .create())
                         .build()
@@ -85,26 +85,26 @@ public class OpenWeatherMapApi {
         okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
         okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
 
-        okhttpClientBuilder.addInterceptor(new NetworkConnectionInterceptor() {
-            @Override
-            public boolean isInternetAvailable() {
-
-                boolean isInternetAvailable = OpenWeatherMapApi.this.isInternetAvailable();
-                if (!isInternetAvailable) {
-                    EventBus.getDefault().post(new InternetDisconnectedEvent());
-                }
-                return isInternetAvailable;
-            }
-
-            @Override
-            public void onInternetUnavailable() {
-            }
-
-            @Override
-            public void onCacheUnavailable() {
-            }
-        });
-
+//        okhttpClientBuilder.addInterceptor(new NetworkConnectionInterceptor() {
+//            @Override
+//            public boolean isInternetAvailable() {
+//
+//                boolean isInternetAvailable = OpenWeatherMapApi.this.isInternetAvailable();
+//                if (!isInternetAvailable) {
+//                    EventBus.getDefault().post(new InternetDisconnectedEvent());
+//                }
+//                return isInternetAvailable;
+//            }
+//
+//            @Override
+//            public void onInternetUnavailable() {
+//            }
+//
+//            @Override
+//            public void onCacheUnavailable() {
+//            }
+//        });
+//
         return okhttpClientBuilder.build();
     }
 

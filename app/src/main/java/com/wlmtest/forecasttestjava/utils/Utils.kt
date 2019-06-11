@@ -34,7 +34,7 @@ object Utils {
      * @return
      */
     @JvmStatic
-    fun formatDate(date: Date?, format: String): String {
+    fun formatDate(date: Date?, format: String?): String {
         return formatDateMiliseconds((date ?: Date()).time, format)
     }
 
@@ -45,8 +45,11 @@ object Utils {
      * @return
      */
     @JvmStatic
-    fun removeInfoAfterPoint(string: String): String {
-        var string = string
+    fun removeInfoAfterPoint(value: Double?): String {
+        if (value==null){
+            return ""
+        }
+        var string:String  = value.toString();
         val posPoint = string.indexOf(".")
         if (posPoint > 0) {
             string = string.substring(0, posPoint)

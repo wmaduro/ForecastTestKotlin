@@ -42,16 +42,16 @@ object ApiDataParser {
 
             //Max Temp
             cityForecastFiveDaysPojo.maxTemp =
-                Utils.removeInfoAfterPoint(java.lang.Double.toString(listReference.main!!.tempMax!!))
+                Utils.removeInfoAfterPoint(listReference.main.tempMax)
 
             //Min Temp
             cityForecastFiveDaysPojo.minTemp =
-                Utils.removeInfoAfterPoint(java.lang.Double.toString(listReference.main!!.tempMin!!))
+                Utils.removeInfoAfterPoint(listReference.main.tempMin)
 
 
             //Temperature
             cityForecastFiveDaysPojo.temperature =
-                Utils.removeInfoAfterPoint(java.lang.Double.toString(listReference.main!!.temp!!))
+                Utils.removeInfoAfterPoint(listReference.main.temp)
 
             //Wind Direction
             cityForecastFiveDaysPojo.setWindDirection(listReference.wind!!.deg!!)
@@ -100,21 +100,21 @@ object ApiDataParser {
             cityForecastPojo.country = listReference.sys!!.country
 
             //date
-            val strDate = Utils.formatDate(Date(), null!!)
+            val strDate = Utils.formatDate(Date(), null)
             cityForecastPojo.setDateReference(strDate)
 
             //Max Temp
             cityForecastPojo.maxTemp =
-                Utils.removeInfoAfterPoint(java.lang.Double.toString(listReference.main!!.tempMax!!))
+                Utils.removeInfoAfterPoint(listReference.main.temp_max)
 
             //Min Temp
             cityForecastPojo.minTemp =
-                Utils.removeInfoAfterPoint(java.lang.Double.toString(listReference.main!!.tempMin!!))
+                Utils.removeInfoAfterPoint(listReference.main.temp_min)
 
 
             //Temperature
             cityForecastPojo.temperature =
-                Utils.removeInfoAfterPoint(java.lang.Double.toString(listReference.main!!.temp!!))
+                Utils.removeInfoAfterPoint(listReference.main.temp)
 
             //Wind Direction
             cityForecastPojo.setWindDirection(listReference.wind!!.deg!!)
