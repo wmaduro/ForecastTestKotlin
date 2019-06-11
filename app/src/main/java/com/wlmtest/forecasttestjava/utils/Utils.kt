@@ -1,5 +1,8 @@
 package com.wlmtest.forecasttestjava.utils
 
+import android.content.Context
+import android.net.ConnectivityManager
+import com.wlmtest.forecasttestjava.base.ForecastTestJavaApplication
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -46,10 +49,10 @@ object Utils {
      */
     @JvmStatic
     fun removeInfoAfterPoint(value: Double?): String {
-        if (value==null){
+        if (value == null) {
             return ""
         }
-        var string:String  = value.toString();
+        var string: String = value.toString();
         val posPoint = string.indexOf(".")
         if (posPoint > 0) {
             string = string.substring(0, posPoint)
@@ -57,6 +60,7 @@ object Utils {
 
         return string
     }
+
     @JvmStatic
     fun capitalizeFirstWord(message: String): String {
         return message.substring(0, 1).toUpperCase() + message.substring(1)
@@ -71,19 +75,39 @@ object Utils {
      * @return
      */
 
-        @JvmStatic
-        fun extractDateInfo(dateReference: String, hour: Boolean): String {
+    @JvmStatic
+    fun extractDateInfo(dateReference: String, hour: Boolean): String {
 
-            var dayMonth: String
+        var dayMonth: String
 
-            if (hour) {
-                dayMonth = dateReference.substring(11, 16)
-            } else {
-                dayMonth = dateReference.substring(8, 10) + "/" + dateReference.substring(5, 7)
-            }
-
-            return dayMonth
+        if (hour) {
+            dayMonth = dateReference.substring(11, 16)
+        } else {
+            dayMonth = dateReference.substring(8, 10) + "/" + dateReference.substring(5, 7)
         }
 
+        return dayMonth
+    }
 
+    /**
+     * Check if internet is available. It is used to prevent requests when internet is down.
+     *
+     * @return
+     */
+    fun isNetworkAvailable(): Boolean {
+
+        if (ForecastTestJavaApplication.context == null) {
+            return true
+        }
+
+        val connectivityManager = ForecastTestJavaApplication.context!!
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+
+    }
 }
+
+

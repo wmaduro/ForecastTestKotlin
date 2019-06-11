@@ -1,9 +1,9 @@
 package com.wlmtest.forecasttestjava.view.main
 
 import android.Manifest
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,7 +17,6 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.view.Gravity
-import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -34,20 +33,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.wlmtest.forecasttestjava.R
 import com.wlmtest.forecasttestjava.base.ActivityBase
 import com.wlmtest.forecasttestjava.repository.ForecastTestJavaRepository
+import com.wlmtest.forecasttestjava.view.forecast.ForecastFragment
 import com.wlmtest.forecasttestjava.view.search.SearchResultFragment
 import com.wlmtest.forecasttestjava.viewmodel.MainViewModeFactory
 import com.wlmtest.forecasttestjava.viewmodel.MainViewModel
-
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import com.wlmtest.forecasttestjava.view.forecast.ForecastFragment
 
 class MainActivity : ActivityBase() {
 
 
     lateinit var mainViewModel: MainViewModel
-        private set
     private lateinit var etCurrentWeatherData: EditText
-    private lateinit var progressDialog: ProgressDialog
+
 
     /**
      * Get the current visible fragment
@@ -61,11 +57,6 @@ class MainActivity : ActivityBase() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        //progress bar
-        this.progressDialog = ProgressDialog(this, R.style.progress_bar_theme)
-        this.progressDialog!!.setCancelable(false)
-
 
         this.mainViewModel = ViewModelProviders.of(this, MainViewModeFactory(ForecastTestJavaRepository()))
             .get(MainViewModel::class.java)
@@ -87,11 +78,6 @@ class MainActivity : ActivityBase() {
         configGPS()
     }
 
-    private fun showProgressDialog(idMessage: Int) {
-        this.progressDialog!!.setMessage(getString(idMessage))
-        this.progressDialog!!.show()
-    }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>,
@@ -101,13 +87,10 @@ class MainActivity : ActivityBase() {
 
         when (requestCode) {
             10 -> configGPS()
-            else -> {
-            }
         }
     }
 
     internal fun configGPS() {
-
 
         if (ActivityCompat.checkSelfPermission(
                 this@MainActivity,
@@ -128,7 +111,7 @@ class MainActivity : ActivityBase() {
 
             val listener = object : LocationListener {
                 override fun onLocationChanged(location: Location) {
-                    mainViewModel!!.findCurrentWeatherDataByGPSCoordinates(location)
+                    mainViewModel.findCurrentWeatherDataByGPSCoordinates(location)
                 }
 
                 override fun onStatusChanged(s: String, i: Int, bundle: Bundle) {}
@@ -156,18 +139,20 @@ class MainActivity : ActivityBase() {
             locationManager.requestSingleUpdate(criteria, listener, myLooper)
 
 
+            val GPS_TIMEOUT:Long = 5000
             val myHandler = Handler(myLooper)
-            myHandler.postDelayed({ setViewWhenGPSTimeout(locationManager, listener) }, 10000)
+
+            myHandler.postDelayed({
+                setViewWhenGPSTimeout(locationManager, listener)
+            }, GPS_TIMEOUT)
 
 
         }
     }
 
     private fun setViewWhenGPSTimeout(locationManager: LocationManager, listener: LocationListener) {
-
         locationManager.removeUpdates(listener)
-        progressDialog!!.dismiss()
-
+        closeProgressDialog()
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -220,26 +205,26 @@ class MainActivity : ActivityBase() {
         /**
          * Show the dialog when the internet is unavailable.
          */
-        this.mainViewModel!!.showInternetUnavailableMessage.observe(this, Observer { showInternetUnavailableMessage() })
+        this.mainViewModel.showInternetUnavailableMessage.observe(this, Observer { showInternetUnavailableMessage() })
 
 
         /**
          * Dismiss the progress dialog when the app is initialized.
          */
 
-        this.mainViewModel!!.appInitialized.observe(this, Observer { appInitialized ->
-            if (appInitialized!!) {
-                progressDialog!!.dismiss()
+        this.mainViewModel.appInitialized.observe(this, Observer { appInitialized ->
+            if (appInitialized) {
+                closeProgressDialog()
             }
         })
 
         /**
          * Switch between fragments and hide keyboard.
          */
-        this.mainViewModel!!.fragmentOrchestrationHelperMutableLiveData.observe(this, Observer { s ->
+        this.mainViewModel.fragmentOrchestrationHelperMutableLiveData.observe(this, Observer { s ->
             if (s == MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT) {
 
-                changeCurrentFragment(ForecastFragment ());
+                changeCurrentFragment(ForecastFragment());
 
             } else if (s == MainOrchestrationHelper.SHOW_SEARCH_RESULT_FRAGMENT) {
 
@@ -258,7 +243,7 @@ class MainActivity : ActivityBase() {
     @SuppressLint("ClickableViewAccessibility")
     private fun setUIListeners() {
 
-        etCurrentWeatherData!!.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+        etCurrentWeatherData.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 findCurrentWeather()
                 return@OnEditorActionListener true
@@ -266,15 +251,15 @@ class MainActivity : ActivityBase() {
             false
         })
 
-        this.etCurrentWeatherData!!.setOnTouchListener(View.OnTouchListener { v, event ->
+        this.etCurrentWeatherData.setOnTouchListener(View.OnTouchListener { v, event ->
             val DRAWABLE_RIGHT = 2
 
             if (event.action == MotionEvent.ACTION_UP) {
 
                 val drawbleWidth =
-                    etCurrentWeatherData!!.compoundDrawables[DRAWABLE_RIGHT].bounds.width() + etCurrentWeatherData!!.paddingRight
+                    etCurrentWeatherData.compoundDrawables[DRAWABLE_RIGHT].bounds.width() + etCurrentWeatherData.paddingRight
 
-                if (event.rawX >= etCurrentWeatherData!!.right - drawbleWidth) {
+                if (event.rawX >= etCurrentWeatherData.right - drawbleWidth) {
 
                     findCurrentWeather()
 
@@ -287,7 +272,7 @@ class MainActivity : ActivityBase() {
 
     private fun findCurrentWeather() {
 
-        if (etCurrentWeatherData!!.text.toString().length <= 2) {
+        if (etCurrentWeatherData.text.toString().length <= 2) {
 
             val toast = Toast.makeText(this, R.string.city_name_greather_than_3, Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0, 0)
@@ -295,7 +280,7 @@ class MainActivity : ActivityBase() {
             return
         }
 
-        mainViewModel!!.findCurrentWeatherDataByCityName(etCurrentWeatherData!!.text.toString())
+        mainViewModel.findCurrentWeatherDataByCityName(etCurrentWeatherData.text.toString())
     }
 
     fun hideKeyboard(activity: Activity) {

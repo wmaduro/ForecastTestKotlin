@@ -2,15 +2,16 @@ package com.wlmtest.forecasttestjava.repository.openweathermap
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
+import android.util.Log
 import com.wlmtest.forecasttestjava.base.ForecastTestJavaApplication
-import com.wlmtest.forecasttestjava.base.NetworkConnectionInterceptor
 import com.wlmtest.forecasttestjava.base.events.InternetDisconnectedEvent
+import com.wlmtest.forecasttestjava.utils.Utils
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import org.greenrobot.eventbus.EventBus
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-
 import java.util.concurrent.TimeUnit
 
 
@@ -23,10 +24,10 @@ class OpenWeatherMapApi private constructor() {
      * Get the API's service
      * @return
      */
-    //                        .client(this.provideOkHttpClient())
     val openWeatherMapInterface: OpenWeatherMapInterface
         get() = Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(this.provideOkHttpClient())
             .addConverterFactory(
                 MoshiConverterFactory
                     .create()
@@ -34,25 +35,6 @@ class OpenWeatherMapApi private constructor() {
             .build()
             .create(OpenWeatherMapInterface::class.java)
 
-    /**
-     * Check if internet is available. It is used to prevent requests when internet is down.
-     *
-     * @return
-     */
-    private val isInternetAvailable: Boolean
-        get() {
-            if (ForecastTestJavaApplication.context == null) {
-                return true
-            }
-
-            val connectivityManager = ForecastTestJavaApplication.context!!
-                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-            val activeNetworkInfo = connectivityManager.activeNetworkInfo
-
-            return activeNetworkInfo != null && activeNetworkInfo.isConnected
-
-        }
 
     /**
      * Set OkHttpclient and the interceptor for internet unavailable.
@@ -60,31 +42,16 @@ class OpenWeatherMapApi private constructor() {
      * @return
      */
     private fun provideOkHttpClient(): OkHttpClient {
-        val okhttpClientBuilder = OkHttpClient.Builder()
-        okhttpClientBuilder.connectTimeout(5, TimeUnit.SECONDS)
-        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS)
-        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS)
 
-        //        okhttpClientBuilder.addInterceptor(new NetworkConnectionInterceptor() {
-        //            @Override
-        //            public boolean isInternetAvailable() {
-        //
-        //                boolean isInternetAvailable = OpenWeatherMapApi.this.isInternetAvailable();
-        //                if (!isInternetAvailable) {
-        //                    EventBus.getDefault().post(new InternetDisconnectedEvent());
-        //                }
-        //                return isInternetAvailable;
-        //            }
-        //
-        //            @Override
-        //            public void onInternetUnavailable() {
-        //            }
-        //
-        //            @Override
-        //            public void onCacheUnavailable() {
-        //            }
-        //        });
-        //
+        val okhttpClientBuilder =
+            OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .addInterceptor(
+                    NetworkAvailableInterceptor()
+                )
+
         return okhttpClientBuilder.build()
     }
 
@@ -102,6 +69,21 @@ class OpenWeatherMapApi private constructor() {
             return instance
         }
     }
+}
 
+class NetworkAvailableInterceptor : Interceptor {
 
+    /**
+     * Interceptor class for setting of the headers for every request
+     */
+    override fun intercept(chain: Interceptor.Chain): Response {
+
+        var request = chain.request()
+        if (!Utils.isNetworkAvailable()) {
+            EventBus.getDefault().post(InternetDisconnectedEvent())
+            val response = chain.proceed(request)
+            return response
+        }
+        return chain.proceed(request)
+    }
 }
