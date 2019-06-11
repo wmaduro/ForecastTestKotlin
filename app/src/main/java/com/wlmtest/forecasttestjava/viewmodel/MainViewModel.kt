@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.wlmtest.forecasttestjava.base.events.InternetDisconnectedEvent
+import com.wlmtest.forecasttestjava.base.events.ProgressDialogLoadingDataEvent
 import com.wlmtest.forecasttestjava.model.api.currentweatherdata.CurrentWeatherData
 import com.wlmtest.forecasttestjava.model.api.fivedaysforecastdata.FiveDaysForecastData
 import com.wlmtest.forecasttestjava.model.pojo.CityForecastPojo
@@ -48,6 +49,8 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
     var appInitialized = MutableLiveData<Boolean>()
     var showInternetUnavailableMessage = MutableLiveData<Boolean>()
 
+    var progressDialogLoadingData= MutableLiveData<Boolean>();
+
     init {
         EventBus.getDefault().register(this)
         setObservers()
@@ -69,6 +72,10 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
         showInternetUnavailableMessage.value = true
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: ProgressDialogLoadingDataEvent) {
+        progressDialogLoadingData.value = event.loading
+    }
 
     /**
      * Set all observers for VM
@@ -163,6 +170,9 @@ constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) 
      * @param cityForecastPojo
      */
     fun setCityForecastPojoSelected(cityForecastPojo: CityForecastPojo) {
+        //clearn  5days data
+        fiveDaysForecastPojoMutableLiveData.value = null
+
         cityForecastPojoSelectedMutableLiveData.value = cityForecastPojo
         fragmentOrchestrationHelperMutableLiveData.value = MainOrchestrationHelper.SHOW_FORECAST_FRAGMENT
     }

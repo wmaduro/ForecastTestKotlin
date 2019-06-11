@@ -139,7 +139,7 @@ class MainActivity : ActivityBase() {
             locationManager.requestSingleUpdate(criteria, listener, myLooper)
 
 
-            val GPS_TIMEOUT:Long = 5000
+            val GPS_TIMEOUT: Long = 5000
             val myHandler = Handler(myLooper)
 
             myHandler.postDelayed({
@@ -207,15 +207,23 @@ class MainActivity : ActivityBase() {
          */
         this.mainViewModel.showInternetUnavailableMessage.observe(this, Observer { showInternetUnavailableMessage() })
 
+        this.mainViewModel.progressDialogLoadingData.observe(this, Observer { loading ->
+
+                if (loading) {
+                    showProgressDialog(R.string.loading_from_api_message)
+                } else {
+                    closeProgressDialog()
+                }
+
+        })
+
 
         /**
          * Dismiss the progress dialog when the app is initialized.
          */
 
         this.mainViewModel.appInitialized.observe(this, Observer { appInitialized ->
-            if (appInitialized) {
-                closeProgressDialog()
-            }
+            closeProgressDialog()
         })
 
         /**

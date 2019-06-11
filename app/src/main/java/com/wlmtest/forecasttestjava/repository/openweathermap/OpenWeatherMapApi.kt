@@ -1,10 +1,8 @@
 package com.wlmtest.forecasttestjava.repository.openweathermap
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.util.Log
-import com.wlmtest.forecasttestjava.base.ForecastTestJavaApplication
 import com.wlmtest.forecasttestjava.base.events.InternetDisconnectedEvent
+import com.wlmtest.forecasttestjava.base.events.ProgressDialogLoadingDataEvent
 import com.wlmtest.forecasttestjava.utils.Utils
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -79,11 +77,20 @@ class NetworkAvailableInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
 
         var request = chain.request()
+
         if (!Utils.isNetworkAvailable()) {
             EventBus.getDefault().post(InternetDisconnectedEvent())
-            val response = chain.proceed(request)
-            return response
+        } else {
+            EventBus.getDefault().post(ProgressDialogLoadingDataEvent(true))
         }
-        return chain.proceed(request)
+
+        var response : Response = chain.proceed(request);
+        Log.d("maduro","----------------------------------------------")
+        Log.d("maduro", response.body().toString())
+        EventBus.getDefault().post(ProgressDialogLoadingDataEvent(false))
+
+        Log.d("maduro","**********************************************")
+
+        return response
     }
 }

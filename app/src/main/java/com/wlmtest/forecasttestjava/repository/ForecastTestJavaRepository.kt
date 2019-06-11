@@ -51,6 +51,8 @@ constructor() {
                 } else {
                     fiveDaysForecastDataMutableLiveData.setValue(null)
                 }
+
+
             }
 
             override fun onFailure(call: Call<FiveDaysForecastData>, t: Throwable) {
