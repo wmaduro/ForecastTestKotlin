@@ -10,7 +10,7 @@ class List {
     var coord: Coord? = null
     lateinit var main: Main
     var dt: Int? = null
-    var wind: Wind? = null
+    lateinit var wind: Wind
     var sys: Sys? = null
     var rain: Any? = null
     var snow: Any? = null

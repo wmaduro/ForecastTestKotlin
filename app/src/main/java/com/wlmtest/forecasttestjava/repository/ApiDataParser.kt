@@ -117,10 +117,10 @@ object ApiDataParser {
                 Utils.removeInfoAfterPoint(listReference.main.temp)
 
             //Wind Direction
-            cityForecastPojo.setWindDirection(listReference.wind!!.deg!!)
+            listReference.wind.deg?.let { cityForecastPojo.setWindDirection(it) }
 
             //Wind Speed
-            cityForecastPojo.windSpeed = java.lang.Double.toString(listReference.wind!!.speed!!)
+            cityForecastPojo.windSpeed = listReference.wind.speed?.let { java.lang.Double.toString(it) }
 
             //Icon
             val weather = if (listReference.weather!!.size > 0) listReference.weather!!.get(0) else null

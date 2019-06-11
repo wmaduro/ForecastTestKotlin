@@ -26,30 +26,26 @@ abstract class ForecastGenericPojo {
      * @param deg
      */
     fun setWindDirection(deg: Double) {
-        try {
-            if (deg >= 337.5 || deg < 22.5) {
-                this.windDirection = ForecastGenericPojo.N
-            } else if (deg >= 22.5 || deg < 67.5) {
-                this.windDirection = ForecastGenericPojo.NE
-            } else if (deg >= 67.5 || deg < 112.5) {
-                this.windDirection = ForecastGenericPojo.E
-            } else if (deg >= 112.5 || deg < 157.5) {
-                this.windDirection = ForecastGenericPojo.SE
-            } else if (deg >= 157.5 || deg < 202.5) {
-                this.windDirection = ForecastGenericPojo.S
-            } else if (deg >= 202.5 || deg < 247.5) {
-                this.windDirection = ForecastGenericPojo.SW
-            } else if (deg >= 247.5 || deg < 292.5) {
-                this.windDirection = ForecastGenericPojo.W
-            } else if (deg >= 292.5 || deg < 337.5) {
-                this.windDirection = ForecastGenericPojo.NW
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+
+        if (deg >= 337.5 || deg < 22.5) {
+            this.windDirection = ForecastGenericPojo.N
+        } else if (deg >= 22.5 || deg < 67.5) {
+            this.windDirection = ForecastGenericPojo.NE
+        } else if (deg >= 67.5 || deg < 112.5) {
+            this.windDirection = ForecastGenericPojo.E
+        } else if (deg >= 112.5 || deg < 157.5) {
+            this.windDirection = ForecastGenericPojo.SE
+        } else if (deg >= 157.5 || deg < 202.5) {
+            this.windDirection = ForecastGenericPojo.S
+        } else if (deg >= 202.5 || deg < 247.5) {
+            this.windDirection = ForecastGenericPojo.SW
+        } else if (deg >= 247.5 || deg < 292.5) {
+            this.windDirection = ForecastGenericPojo.W
+        } else if (deg >= 292.5 || deg < 337.5) {
+            this.windDirection = ForecastGenericPojo.NW
+        } else {
             this.windDirection = ForecastGenericPojo.UNKNOWN
         }
-
-
     }
 
     fun getWindDirection(): String? {
