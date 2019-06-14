@@ -2,7 +2,7 @@ package com.wlmtest.forecasttestjava.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.wlmtest.forecasttestjava.base.ForecastTestJavaApplication
+import com.wlmtest.forecasttestjava.base.ForecastTestKotlinApplication
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -96,11 +96,11 @@ object Utils {
      */
     fun isNetworkAvailable(): Boolean {
 
-        if (ForecastTestJavaApplication.context == null) {
+        if (ForecastTestKotlinApplication.context == null) {
             return true
         }
 
-        val connectivityManager = ForecastTestJavaApplication.context!!
+        val connectivityManager = ForecastTestKotlinApplication.context!!
             .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         val activeNetworkInfo = connectivityManager.activeNetworkInfo

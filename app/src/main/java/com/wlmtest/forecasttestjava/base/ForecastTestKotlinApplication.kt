@@ -1,10 +1,8 @@
 package com.wlmtest.forecasttestjava.base
 
-import android.app.Activity
 import android.app.Application
-import android.os.Bundle
 
-class ForecastTestJavaApplication : Application() {
+class ForecastTestKotlinApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -13,7 +11,7 @@ class ForecastTestJavaApplication : Application() {
 
     companion object {
         @JvmStatic
-        lateinit var context: ForecastTestJavaApplication
+        lateinit var context: ForecastTestKotlinApplication
     }
 
 
