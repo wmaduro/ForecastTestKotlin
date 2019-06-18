@@ -47,13 +47,17 @@ dependencies {
 //    implementation "com.google.dagger:dagger-android-support:$dagger_version"
 
     // Network
-    def okHttpVersion = '3.8.0'
-    def retrofitVersion = '2.5.0'
+    def okHttpVersion = '3.11.0'
+    def retrofitVersion = '2.3.0'
     def moshiVersion = '1.5.0'
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
-//    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+
+
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.moshi:moshi:$moshiVersion"
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
@@ -61,4 +65,21 @@ dependencies {
     def eventbusVersion = '3.1.1'
     implementation "org.greenrobot:eventbus:$eventbusVersion"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    // unit test
+    def mockitoKotlinVersion = '2.0.0-RC1'
+    def junitVersion = '4.12'
+    def espressoVersion = '3.1.1'
+    def androidxTest = '1.1.0'
+    def androidxTestRules = '1.2.0-alpha04'
+    def archCompomentVersion = '2.0.0'
+
+    testImplementation "com.squareup.okhttp3:mockwebserver:3.11.0"
+    testImplementation "androidx.arch.core:core-testing:$archCompomentVersion"
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxTest"
+    androidTestImplementation "androidx.test:core:$androidxTest"
+    androidTestImplementation "androidx.test:rules:$androidxTestRules"
 }
