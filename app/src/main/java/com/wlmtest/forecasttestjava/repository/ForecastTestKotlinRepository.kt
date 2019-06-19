@@ -12,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ForecastTestJavaRepository private constructor() {
+class ForecastTestKotlinRepository private constructor() {
 
     private val openWeatherMapService: OpenWeatherMapService
 
@@ -22,13 +22,13 @@ class ForecastTestJavaRepository private constructor() {
 
     companion object {
 
-        private var instance: ForecastTestJavaRepository = ForecastTestJavaRepository()
+        private var instance: ForecastTestKotlinRepository = ForecastTestKotlinRepository()
 
-        fun getInstance(): ForecastTestJavaRepository {
+        fun getInstance(): ForecastTestKotlinRepository {
             if (instance == null) {
-                synchronized(ForecastTestJavaRepository::class.java) {
+                synchronized(ForecastTestKotlinRepository::class.java) {
                     if (instance == null)
-                        instance = ForecastTestJavaRepository()
+                        instance = ForecastTestKotlinRepository()
                 }
             }
             return instance

@@ -1,4 +1,4 @@
-# ForecastTestJava <img src="https://i.imgur.com/bdtycwr.png">
+# ForecastTestKotlin <img src="https://i.imgur.com/bdtycwr.png">
 Opensource weather app for Android. It gathers data from [OpenWeatherMap](https://openweathermap.org/), via their public API.
 
 
@@ -30,7 +30,7 @@ The app was implemented using the following best practices' architecture:
 
 * __OVERVIEW__
 
-[<img src="https://i.imgur.com/CQgT3fj.png">](https://i.imgur.com/CQgT3fj.png)
+[<img src="https://i.imgur.com/SBR3g5C.png">](https://i.imgur.com/SBR3g5C.png)
 
 
 * __Package "view"__

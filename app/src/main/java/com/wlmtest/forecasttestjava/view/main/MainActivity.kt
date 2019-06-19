@@ -32,7 +32,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.wlmtest.forecasttestjava.R
 import com.wlmtest.forecasttestjava.base.ActivityBase
-import com.wlmtest.forecasttestjava.repository.ForecastTestJavaRepository
+import com.wlmtest.forecasttestjava.repository.ForecastTestKotlinRepository
 import com.wlmtest.forecasttestjava.view.forecast.ForecastFragment
 import com.wlmtest.forecasttestjava.view.search.SearchResultFragment
 import com.wlmtest.forecasttestjava.viewmodel.MainViewModelFactory
@@ -58,7 +58,7 @@ class MainActivity : ActivityBase() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainViewModel = ViewModelProviders.of(this, MainViewModelFactory(ForecastTestJavaRepository.getInstance()))
+        mainViewModel = ViewModelProviders.of(this, MainViewModelFactory(ForecastTestKotlinRepository.getInstance()))
             .get(MainViewModel::class.java)
 
         if (fragmentContainer == null) {
