@@ -30,7 +30,7 @@ The app was implemented using the following best practices' architecture:
 
 * __OVERVIEW__
 
-[<img src="https://i.imgur.com/SBR3g5C.png">](https://i.imgur.com/SBR3g5C.png)
+[<img src="https://i.imgur.com/sfLPjTc.png">](https://i.imgur.com/sfLPjTc.png)
 
 
 * __Package "view"__
