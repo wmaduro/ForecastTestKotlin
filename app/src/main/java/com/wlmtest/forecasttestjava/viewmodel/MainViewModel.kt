@@ -10,7 +10,7 @@ import com.wlmtest.forecasttestjava.model.api.fivedaysforecastdata.FiveDaysForec
 import com.wlmtest.forecasttestjava.model.pojo.CityForecastPojo
 import com.wlmtest.forecasttestjava.model.pojo.forecastfivedays.FiveDaysForecastPojo
 import com.wlmtest.forecasttestjava.repository.ApiDataParser
-import com.wlmtest.forecasttestjava.repository.ForecastTestKotlinRepository
+import com.wlmtest.forecasttestjava.repository.ForecastTestJavaRepository
 import com.wlmtest.forecasttestjava.view.main.MainOrchestrationHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -20,7 +20,7 @@ import java.util.ArrayList
 
 
 class MainViewModel
-constructor(private val forecastTestKotlinRepository: ForecastTestKotlinRepository) : ViewModel() {
+constructor(private val forecastTestJavaRepository: ForecastTestJavaRepository) : ViewModel() {
 
 
     /**
@@ -118,7 +118,7 @@ constructor(private val forecastTestKotlinRepository: ForecastTestKotlinReposito
          *
          */
         cityForecastPojoSelected.observeForever { cityForecastPojo ->
-            forecastTestKotlinRepository
+            forecastTestJavaRepository
                 .findFiveDaysForecastData(cityForecastPojo.cityId!!, fiveDaysForecastData)
         }
 
@@ -142,7 +142,7 @@ constructor(private val forecastTestKotlinRepository: ForecastTestKotlinReposito
      */
     fun findCurrentWeatherDataByCityName(cityName: String) {
 
-        forecastTestKotlinRepository
+        forecastTestJavaRepository
             .findCurrentWeatherData(cityName, currentWeatherData)
 
     }
@@ -156,7 +156,7 @@ constructor(private val forecastTestKotlinRepository: ForecastTestKotlinReposito
      */
     fun findCurrentWeatherDataByGPSCoordinates(location: Location) {
 
-        forecastTestKotlinRepository
+        forecastTestJavaRepository
             .findCurrentWeatherData(location, currentWeatherData)
 
     }
