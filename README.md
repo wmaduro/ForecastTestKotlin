@@ -94,7 +94,7 @@ The app was implemented using the following best practices' architecture:
 [<img src="https://i.imgur.com/YYZ6qrF.png" width=250>](https://i.imgur.com/YYZ6qrF.png)
 [<img src="https://i.imgur.com/I3e3rDl.png" width=250>](https://i.imgur.com/I3e3rDl.png)
 [<img src="https://i.imgur.com/fpCLfh0.jpg" width=250>](https://i.imgur.com/fpCLfh0.jpg)
-[<img src="https://i.imgur.com/mD7pSU5.jpg" width=250>](https://i.imgur.com/mD7pSU5.jpg)
+<!-- [<img src="https://i.imgur.com/mD7pSU5.jpg" width=250>](https://i.imgur.com/mD7pSU5.jpg) -->
 
 
 
